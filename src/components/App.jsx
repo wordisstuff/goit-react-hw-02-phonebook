@@ -1,8 +1,8 @@
 import { Component } from "react";
 import Contacts from "./Contscts/Contacts";
-import { FormContact } from "./FormContact/FormContact";
 import { nanoid } from "nanoid";
 import ContactList from "./ContactList/ContactList";
+import FormContact from "./FormContact/FormContact";
 
 
 class App extends Component {

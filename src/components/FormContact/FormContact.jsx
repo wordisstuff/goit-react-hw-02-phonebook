@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Container } from "./FormContact.styled";
 
-export class FormContact extends Component {
+class FormContact extends Component {
     state = {
         name: '',
         number: ''
@@ -41,3 +41,5 @@ export class FormContact extends Component {
         </>
     }
 }
+
+export default FormContact
