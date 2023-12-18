@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import ContactList from "./ContactList/ContactList";
 
 
-export class App extends Component {
+class App extends Component {
 
   state = {
     contacts: [
@@ -61,3 +61,5 @@ export class App extends Component {
     );
   }
 };
+
+export default App 
