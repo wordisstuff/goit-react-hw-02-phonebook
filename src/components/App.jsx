@@ -1,6 +1,5 @@
 import { Component } from "react";
 import Contacts from "./Contscts/Contacts";
-import { nanoid } from "nanoid";
 import ContactList from "./ContactList/ContactList";
 import FormContact from "./FormContact/FormContact";
 
@@ -14,41 +13,37 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: [],
-    name: '',
-    number: '',
-    showeContacts: false
+    filter: '',
   }
 
 
   contactFilter = ({ name }) => {
-    if (name) {
-      const foundContakt = this.state.contacts.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))
-      this.setState({
-        filter: [...foundContakt]
-      })
-    } else {
-      this.setState({
-        filter: [...this.state.contacts]
-      })
-    }
+    this.setState(() => {
+      return {
+        filter: name,
+      }
+    })
   }
 
+
+
   createUser = (data) => {
-    if (this.state.contacts.some(item => item.name === data.name)) {
+    console.log(data);
+    if (this.state.contacts.some(item => item.name.toLowerCase() === data.name.toLowerCase())) {
       alert(`${data.name} is already in contacts`)
     } else {
-      this.state.contacts.push({ ...data, id: nanoid() })
-      this.setState({ ...data, showeContacts: true, filter: this.state.contacts });
+      this.setState(prevState => (
+        { contacts: [...prevState.contacts, data] }
+      ));
+      console.log(this.state.contacts);
+      console.log(this.state.filter);
     }
   }
 
   delete = (nameDel) => {
-    this.state.filter.splice(this.state.filter.findIndex(arr => arr.id === nameDel), 1)
-    this.setState({
-      filter: [...this.state.filter],
-      contacts: [...this.state.filter]
-    })
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== nameDel),
+    }));
   }
 
   render() {
@@ -56,7 +51,10 @@ class App extends Component {
       <>
         <FormContact createUser={this.createUser} />
         <Contacts contactFilter={this.contactFilter} />
-        {this.state.showeContacts && <ContactList delete={this.delete} contactsArrFilter={this.state.filter} contactsArr={this.state.contacts} />}
+        {this.state.contacts.length !== 0 &&
+          <ContactList delete={this.delete}
+            contactsArr={this.state.contacts}
+            filter={this.state.filter} />}
       </>
     );
   }

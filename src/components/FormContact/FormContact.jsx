@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Container } from "./FormContact.styled";
+import { nanoid } from "nanoid";
 
 class FormContact extends Component {
     state = {
@@ -7,16 +8,18 @@ class FormContact extends Component {
         number: ''
     }
     handleChenge = ({ target }) => {
-        this.setState({
+        this.setState(prev => ({
             [target.name]: target.value
-        })
+        }))
     }
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.createUser({
-            name: this.state.name,
-            number: this.state.number
+            name: e.target.name.value,
+            number: e.target.number.value,
+            id: nanoid()
         })
+        console.log(e.target.name.value);
         this.setState({
             name: '',
             number: ''

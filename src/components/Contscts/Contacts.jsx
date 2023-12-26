@@ -9,6 +9,7 @@ class Contacts extends Component {
 
     }
     handleFilter = ({ target }) => {
+        console.log(target.value);
         this.props.contactFilter({ name: target.value })
         this.setState({
             name: target.value,
@@ -22,17 +23,6 @@ class Contacts extends Component {
                     <label htmlFor="cname">find contacts by name</label>
                     <input name="name" onChange={this.handleFilter} value={this.state.name} type="text" placeholder="Contact Name.." required />
                 </div>
-                <>
-                    {/* <ul>hoo
-                        {this.props.contactsArr && this.props.contactsArr.map(({ name, number, id }) => {
-                            return <li key={id}>
-                                <p>name: {name}</p>
-                                <p>number: {number}</p>
-                            </li>
-                        }
-                        )}
-                    </ul> */}
-                </>
             </Container>
         </>
     }

@@ -13,13 +13,15 @@ class ContactList extends Component {
         return (
             <>
                 <Container>
-                    {this.props.contactsArrFilter && this.props.contactsArrFilter.map(({ name, number, id }) => {
-                        return (<div key={id} >
-                            <p>name: {name}</p>
-                            <p>number: {number}</p>
-                            <button id={id} onClick={this.contactDel}>&#9746;</button>
-                        </div >)
-                    })}
+                    {this.props.contactsArr &&
+                        this.props.contactsArr.filter(item => item.name.toLowerCase().includes(this.props.filter.toLowerCase()))
+                            .map(({ name, number, id }) => {
+                                return (<div key={id} >
+                                    <p>name: {name}</p>
+                                    <p>number: {number}</p>
+                                    <button id={id} onClick={this.contactDel}>&#9746;</button>
+                                </div >)
+                            })}
                 </Container>
             </>
         );
