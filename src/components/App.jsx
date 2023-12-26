@@ -16,7 +16,6 @@ class App extends Component {
     filter: '',
   }
 
-
   contactFilter = ({ name }) => {
     this.setState(() => {
       return {
@@ -28,15 +27,13 @@ class App extends Component {
 
 
   createUser = (data) => {
-    console.log(data);
     if (this.state.contacts.some(item => item.name.toLowerCase() === data.name.toLowerCase())) {
       alert(`${data.name} is already in contacts`)
     } else {
+
       this.setState(prevState => (
         { contacts: [...prevState.contacts, data] }
       ));
-      console.log(this.state.contacts);
-      console.log(this.state.filter);
     }
   }
 
@@ -47,14 +44,15 @@ class App extends Component {
   }
 
   render() {
+    const filterArr = this.state.contacts.filter(item => item.name.toLowerCase().includes(this.state.filter.toLowerCase()))
+
     return (
       <>
         <FormContact createUser={this.createUser} />
         <Contacts contactFilter={this.contactFilter} />
         {this.state.contacts.length !== 0 &&
           <ContactList delete={this.delete}
-            contactsArr={this.state.contacts}
-            filter={this.state.filter} />}
+            filter={filterArr} />}
       </>
     );
   }

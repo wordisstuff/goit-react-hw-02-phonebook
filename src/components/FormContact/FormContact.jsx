@@ -7,22 +7,21 @@ class FormContact extends Component {
         name: '',
         number: ''
     }
+
     handleChenge = ({ target }) => {
-        this.setState(prev => ({
-            [target.name]: target.value
+        this.setState(() => ({
+            [target.name]: target.value,
+            id: nanoid()
         }))
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.createUser({
-            name: e.target.name.value,
-            number: e.target.number.value,
-            id: nanoid()
-        })
-        console.log(e.target.name.value);
+        this.props.createUser({ ...this.state })
+
         this.setState({
             name: '',
-            number: ''
+            number: '',
+            id: ''
         })
     }
     render() {

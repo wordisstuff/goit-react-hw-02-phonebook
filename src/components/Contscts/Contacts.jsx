@@ -4,12 +4,9 @@ import { Container } from "./Contacts.styled";
 
 class Contacts extends Component {
     state = {
-        name: '',
-        filter: ''
-
+        name: ''
     }
     handleFilter = ({ target }) => {
-        console.log(target.value);
         this.props.contactFilter({ name: target.value })
         this.setState({
             name: target.value,

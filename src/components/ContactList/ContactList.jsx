@@ -3,9 +3,7 @@ import { Container } from "./ContactList.styled";
 
 
 class ContactList extends Component {
-    state = {
-        contacts: []
-    }
+
     contactDel = (e) => {
         this.props.delete(e.target.id)
     }
@@ -13,8 +11,8 @@ class ContactList extends Component {
         return (
             <>
                 <Container>
-                    {this.props.contactsArr &&
-                        this.props.contactsArr.filter(item => item.name.toLowerCase().includes(this.props.filter.toLowerCase()))
+                    {this.props.filter &&
+                        this.props.filter
                             .map(({ name, number, id }) => {
                                 return (<div key={id} >
                                     <p>name: {name}</p>
